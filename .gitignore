@@ -1,0 +1,5 @@
+# Starters are source-only; dependencies are installed by the executor, never committed.
+node_modules/
+vendor/
+.DS_Store
+*.log
