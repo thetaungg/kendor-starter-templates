@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Declarative runtime config — the single source of truth for how this project installs, runs and is
+# graded in the Kendor sandbox. The backend re-emits an authoritative copy of this file at provision;
+# editing it inside the sandbox does not change how your code boots or scores.
+version: 1
+runtime:
+  type: php
+  version: "8.3"
+services:
+  app:
+    dev:
+      command: php -S $HOST:$PORT
+      port: 8000
+preview:
+  service: app

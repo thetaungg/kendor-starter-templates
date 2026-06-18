@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Declarative runtime config — the single source of truth for how this project installs, runs and is
+# graded in the Kendor sandbox. The backend re-emits an authoritative copy of this file at provision;
+# editing it inside the sandbox does not change how your code boots or scores.
+#
+# PHP/composer setup lives in the top-level install (shared by the app, the test grader and the vite
+# window). npm lives on the `vite` service so PHP grading never pays for a Node install.
+version: 1
+runtime:
+  type: php
+  version: "8.3"
+install:
+  commands:
+    - composer install --no-interaction --prefer-dist --no-progress
+    - php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - php artisan key:generate --force
+    - php -r "file_exists('database/database.sqlite') || touch('database/database.sqlite');"
+    - php artisan migrate --force
+services:
+  app:
+    dev:
+      command: php artisan serve --host $HOST --port $PORT
+      port: 8000
+    test:
+      command: ./vendor/bin/phpunit --log-junit /tmp/kendor-phpunit.xml
+  vite:
+    install:
+      commands:
+        - npm ci
+    dev:
+      command: npm run dev -- --port $PORT
+      port: 5173
+preview:
+  service: app
