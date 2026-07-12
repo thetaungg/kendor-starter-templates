@@ -1,4 +1,4 @@
-package kendor
+package main
 
 import "time"
 
@@ -38,3 +38,5 @@ func (b *Bucket) AllowAt(now time.Time) bool {
 	}
 	return false
 }
+
+func main() {}

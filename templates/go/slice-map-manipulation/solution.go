@@ -1,4 +1,4 @@
-package kendor
+package main
 
 // Implement the three helpers below. Only this file is editable by the candidate.
 
@@ -16,3 +16,5 @@ func SumInts(nums []int) int {
 	// TODO: implement
 	return 0
 }
+
+func main() {}

@@ -1,4 +1,4 @@
-package kendor
+package main
 
 import (
 	"encoding/json"
@@ -25,3 +25,5 @@ func ParseUser(data []byte) (User, error) {
 	}
 	return u, nil
 }
+
+func main() {}

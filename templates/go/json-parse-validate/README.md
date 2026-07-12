@@ -1,6 +1,6 @@
 # Parse & Validate JSON
 
-Parse a JSON user record and validate it in `solution.go` (package `kendor`).
+Parse a JSON user record and validate it in `solution.go` (package `main`).
 
 The `User` type is already declared:
 

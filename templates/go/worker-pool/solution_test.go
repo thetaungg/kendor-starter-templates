@@ -1,4 +1,4 @@
-package kendor
+package main
 
 import (
 	"reflect"

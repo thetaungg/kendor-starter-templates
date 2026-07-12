@@ -1,6 +1,6 @@
 # Slice & Map Manipulation
 
-Implement three small slice/map helpers in `solution.go` (package `kendor`).
+Implement three small slice/map helpers in `solution.go` (package `main`).
 
 ## Requirements
 

@@ -1,4 +1,4 @@
-package kendor
+package main
 
 import "sync"
 
@@ -33,3 +33,5 @@ func Process(jobs []int, workers int, fn func(int) int) []int {
 
 	return results
 }
+
+func main() {}

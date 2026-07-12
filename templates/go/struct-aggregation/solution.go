@@ -1,4 +1,4 @@
-package kendor
+package main
 
 // Person is the record to aggregate. Do not change this type.
 type Person struct {
@@ -18,3 +18,5 @@ func AverageAgeByCity(people []Person) map[string]float64 {
 	// TODO: implement
 	return nil
 }
+
+func main() {}

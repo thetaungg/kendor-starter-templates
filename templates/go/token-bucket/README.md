@@ -1,6 +1,6 @@
 # Token-Bucket Rate Limiter
 
-Implement a deterministic token-bucket rate limiter in `solution.go` (package `kendor`).
+Implement a deterministic token-bucket rate limiter in `solution.go` (package `main`).
 
 The clock is passed in explicitly (`AllowAt(now)`) so behaviour is fully testable without real time.
 

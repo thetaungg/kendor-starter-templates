@@ -1,4 +1,4 @@
-package kendor
+package main
 
 // Reference solution — stripped from the candidate seed (kendor.solutionDir).
 
@@ -33,3 +33,5 @@ func SumInts(nums []int) int {
 	}
 	return total
 }
+
+func main() {}

@@ -1,6 +1,6 @@
 # Worker Pool
 
-Implement a bounded worker pool in `solution.go` (package `kendor`).
+Implement a bounded worker pool in `solution.go` (package `main`).
 
 ## Requirements
 

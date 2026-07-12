@@ -1,6 +1,6 @@
 # Struct Aggregation
 
-Aggregate a slice of `Person` values in `solution.go` (package `kendor`).
+Aggregate a slice of `Person` values in `solution.go` (package `main`).
 
 The `Person` type is already declared:
 

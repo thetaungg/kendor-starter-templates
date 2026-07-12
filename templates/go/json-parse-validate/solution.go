@@ -1,4 +1,4 @@
-package kendor
+package main
 
 // User is the record to parse. Do not change this type.
 type User struct {
@@ -11,3 +11,5 @@ func ParseUser(data []byte) (User, error) {
 	// TODO: implement
 	return User{}, nil
 }
+
+func main() {}
