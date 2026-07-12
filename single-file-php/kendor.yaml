@@ -15,6 +15,9 @@ services:
       command: ./vendor/bin/phpunit --log-junit /tmp/kendor-phpunit.xml
 kendor:
   type: SINGLE_FILE
+  title: Single file
+  entryFile: Solution.php
+  order: 10
   gradeService: app
   editablePaths:
     - Solution.php

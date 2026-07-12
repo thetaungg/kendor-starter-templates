@@ -11,6 +11,9 @@ services:
       command: pytest --tap-stream
 kendor:
   type: SINGLE_FILE
+  title: Single file
+  entryFile: solution.py
+  order: 10
   gradeService: app
   editablePaths:
     - solution.py

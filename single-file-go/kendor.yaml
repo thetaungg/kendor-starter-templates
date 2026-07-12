@@ -11,6 +11,9 @@ services:
       command: go test -json ./... | node /opt/kendor/gotest-tap.mjs
 kendor:
   type: SINGLE_FILE
+  title: Single file
+  entryFile: solution.go
+  order: 10
   gradeService: app
   editablePaths:
     - solution.go

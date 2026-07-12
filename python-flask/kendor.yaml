@@ -20,3 +20,8 @@ services:
       command: pytest --tap-stream
 preview:
   service: app
+# Starter-catalog metadata — read by the registry seed (title/order drive the builder dropdown).
+kendor:
+  title: Flask
+  entryFile: app.py
+  order: 0

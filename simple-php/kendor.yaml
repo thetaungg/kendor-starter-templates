@@ -13,3 +13,8 @@ services:
       port: 8000
 preview:
   service: app
+# Starter-catalog metadata — read by the registry seed (title/order drive the builder dropdown).
+kendor:
+  title: Simple PHP
+  entryFile: index.php
+  order: 1

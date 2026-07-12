@@ -11,6 +11,9 @@ services:
       command: node --test
 kendor:
   type: SINGLE_FILE
+  title: Single file
+  entryFile: solution.js
+  order: 10
   gradeService: app
   editablePaths:
     - solution.js
