@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Single-file Python challenge. The candidate edits solution.py; the hidden test grades it via the
+# suite harness (pytest -> TAP). The .solution/ reference is stripped from the candidate seed.
+version: 1
+runtime:
+  type: python
+  version: "3.12"
+services:
+  app:
+    test:
+      command: pytest --tap-stream
+kendor:
+  type: SINGLE_FILE
+  title: "LRU Cache Decorator"
+  difficulty: hard
+  category: Algorithms
+  tags: [decorators, cache, ordereddict]
+  gradeService: app
+  editablePaths:
+    - solution.py
+  solutionDir: .solution

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Flask web starter. The candidate builds a Flask app (routes in app.py, pages in templates/); the
+# dev server is exposed through the Kendor preview proxy (Flask's dev server does not restrict Host
+# headers, so no proxy plugin is needed). Grading runs the suite harness (pytest -> TAP). Candidate
+# dependencies install with `pip install --user` into PYTHONUSERBASE on first boot.
+version: 1
+runtime:
+  type: python
+  version: "3.12"
+install:
+  commands:
+    - pip install --user -r requirements.txt
+services:
+  app:
+    dev:
+      # --reload so edits are reflected live in the preview; no --debugger (avoid the Werkzeug console).
+      command: flask --app app run --host $HOST --port $PORT --reload
+      port: 5000
+    test:
+      command: pytest --tap-stream
+preview:
+  service: app

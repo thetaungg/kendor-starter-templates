@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Single-file Go challenge. The candidate edits solution.go; the hidden test (solution_test.go) grades
+# it via the suite harness (go test -json -> TAP). The .solution/ reference is stripped from the seed.
+version: 1
+runtime:
+  type: go
+  version: "1.22"
+services:
+  app:
+    test:
+      command: go test -json ./... | node /opt/kendor/gotest-tap.mjs
+kendor:
+  type: SINGLE_FILE
+  title: "Slice & Map Manipulation"
+  difficulty: easy
+  category: Algorithms
+  tags: [slices, maps, go]
+  gradeService: app
+  editablePaths:
+    - solution.go
+  solutionDir: .solution

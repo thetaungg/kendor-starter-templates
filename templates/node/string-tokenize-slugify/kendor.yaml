@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Single-file Node challenge. The candidate edits solution.js; the hidden test grades it via the
+# suite harness (node --test -> TAP). The .solution/ reference is stripped from the candidate seed.
+version: 1
+runtime:
+  type: node
+  version: "22"
+services:
+  app:
+    test:
+      command: node --test
+kendor:
+  type: SINGLE_FILE
+  title: "String Tokenize & Slugify"
+  difficulty: easy
+  category: Algorithms
+  tags: [strings, parsing, regex]
+  gradeService: app
+  editablePaths:
+    - solution.js
+  solutionDir: .solution

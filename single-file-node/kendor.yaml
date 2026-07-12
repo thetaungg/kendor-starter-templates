@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Single-file Node challenge starter. The candidate edits solution.js; the hidden test
+# (solution.test.js) grades it via the suite harness (node --test → TAP). No preview.
+version: 1
+runtime:
+  type: node
+  version: "22"
+services:
+  app:
+    test:
+      command: node --test
+kendor:
+  type: SINGLE_FILE
+  gradeService: app
+  editablePaths:
+    - solution.js

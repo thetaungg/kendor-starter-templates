@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# FastAPI web starter. The candidate builds a typed JSON API (routes + Pydantic models in main.py);
+# uvicorn serves it through the Kendor preview proxy (uvicorn does not restrict Host headers, so no
+# proxy plugin is needed). Grading runs the suite harness (pytest -> TAP). Candidate dependencies
+# install with `pip install --user` into PYTHONUSERBASE on first boot.
+version: 1
+runtime:
+  type: python
+  version: "3.12"
+install:
+  commands:
+    - pip install --user -r requirements.txt
+services:
+  app:
+    dev:
+      # --reload (watchfiles, from uvicorn[standard]) so edits are reflected live in the preview.
+      command: uvicorn main:app --host $HOST --port $PORT --reload
+      port: 8000
+    test:
+      command: pytest --tap-stream
+preview:
+  service: app

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Single-file Node challenge. The candidate edits solution.js; the hidden test (solution.test.js)
+# grades it via the suite harness (node --test -> TAP). The reference solution in .solution/ is
+# stripped from the candidate seed. No dev service => no preview.
+version: 1
+runtime:
+  type: node
+  version: "22"
+services:
+  app:
+    test:
+      command: node --test
+kendor:
+  type: SINGLE_FILE
+  title: "Array & Object Transforms"
+  difficulty: easy
+  category: Algorithms
+  tags: [arrays, objects, reduce]
+  gradeService: app
+  editablePaths:
+    - solution.js
+  solutionDir: .solution

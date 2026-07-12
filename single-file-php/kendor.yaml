@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Single-file PHP challenge starter. The candidate edits Solution.php; the hidden test
+# (SolutionTest.php) grades it via PHPUnit. The agent reads JUnit from /tmp/kendor-phpunit.xml,
+# so the test command MUST write it there (mirrors the Laravel starter). No preview.
+version: 1
+runtime:
+  type: php
+  version: "8.3"
+install:
+  commands:
+    - composer install --no-interaction --prefer-dist --no-progress
+services:
+  app:
+    test:
+      command: ./vendor/bin/phpunit --log-junit /tmp/kendor-phpunit.xml
+kendor:
+  type: SINGLE_FILE
+  gradeService: app
+  editablePaths:
+    - Solution.php

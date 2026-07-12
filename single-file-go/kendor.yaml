@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Single-file Go challenge starter. The candidate edits solution.go; the hidden test
+# (solution_test.go) grades it via the suite harness (go test -json → TAP). No preview.
+version: 1
+runtime:
+  type: go
+  version: "1.22"
+services:
+  app:
+    test:
+      command: go test -json ./... | node /opt/kendor/gotest-tap.mjs
+kendor:
+  type: SINGLE_FILE
+  gradeService: app
+  editablePaths:
+    - solution.go

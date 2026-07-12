@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Single-file Go challenge. The candidate edits solution.go; the hidden test grades it via the suite
+# harness (go test -json -> TAP). The .solution/ reference is stripped from the candidate seed.
+version: 1
+runtime:
+  type: go
+  version: "1.22"
+services:
+  app:
+    test:
+      command: go test -json ./... | node /opt/kendor/gotest-tap.mjs
+kendor:
+  type: SINGLE_FILE
+  title: "Parse & Validate JSON"
+  difficulty: medium
+  category: Algorithms
+  tags: [json, validation, errors]
+  gradeService: app
+  editablePaths:
+    - solution.go
+  solutionDir: .solution
