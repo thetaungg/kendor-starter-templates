@@ -10,6 +10,13 @@ them to S3 (it never serves them from GitHub directly).
 | `vite-jsx` | Node.js | `src/App.jsx` |
 | `laravel` | PHP (Laravel) | `routes/web.php` |
 | `simple-php` | PHP | `index.php` |
+| `python-flask` | Python (Flask) | `app.py` |
+| `python-fastapi` | Python (FastAPI) | `main.py` |
+| `go-http` | Go (`net/http`) | `main.go` |
+| `go-cli` | Go (command line) | `main.go` |
+| `single-file-node` · `-php` · `-python` · `-go` | one per runtime | the one editable solution file |
+
+Challenge templates live under `templates/<language>/<slug>/` and are seeded the same way.
 
 Starters are **source-only** — no `node_modules/` or `vendor/`. Dependencies are installed by the
 sandbox executor's build phase (or baked into its image), so don't commit installed deps.
@@ -25,5 +32,6 @@ STARTERS_REPO=thetaungg/kendor-starter-templates \
 ```
 
 The seed fetches this repo once, extracts each folder, re-roots and re-zips it, and uploads to
-`templates/starters/<slug>.zip` in S3. To add a starter: add a folder here **and** an entry in
-`apps/backend/src/runtime/runtime.registry.ts` (`STARTER_SEEDS`), then re-run the seed.
+`templates/starters/<slug>.zip` in S3. Starters are self-defining: any top-level folder with a
+`kendor.yaml` is one, and its `kendor:` block (`title`, `entryFile`, `order`) drives the builder
+dropdown. To add a starter, add a folder here and re-run the seed.
