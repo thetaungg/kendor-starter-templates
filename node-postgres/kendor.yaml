@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Express API on PostgreSQL, with Valkey (Redis-compatible) caching the todo list. Both run inside the
+# sandbox and start before the install; db/seed.sql creates and fills the table once. The app reads
+# DATABASE_URL and REDIS_URL, which Kendor sets. Every grade starts with empty databases and runs the seed
+# again, so tests see the same rows each time.
+version: 1
+runtime:
+  type: node
+  version: "22"
+databases:
+  - type: postgres
+    version: "18"
+    init: db/seed.sql
+  - type: valkey
+    version: "9"
+services:
+  app:
+    install:
+      commands:
+        - npm ci
+    dev:
+      command: node --watch src/server.js
+      port: 3000
+    test:
+      command: node --test
+preview:
+  service: app
+# Starter-catalog metadata — read by the registry seed (title/order drive the builder dropdown).
+kendor:
+  title: Express + PostgreSQL + Valkey
+  entryFile: src/app.js
+  order: 2

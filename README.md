@@ -7,6 +7,7 @@ them to S3 (it never serves them from GitHub directly).
 | Folder | Runtime | Entry |
 |---|---|---|
 | `vite-tsx` | Node.js | `src/App.tsx` |
+| `node-postgres` | Node.js (Express + PostgreSQL + Valkey) | `src/app.js` |
 | `vite-jsx` | Node.js | `src/App.jsx` |
 | `laravel` | PHP (Laravel) | `routes/web.php` |
 | `simple-php` | PHP | `index.php` |
