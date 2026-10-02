@@ -4,11 +4,15 @@
 # editing it inside the sandbox does not change how your code boots or scores.
 #
 # PHP/composer setup lives in the top-level install (shared by the app, the test grader and the vite
-# window). npm lives on the `vite` service so PHP grading never pays for a Node install.
+# window). npm lives on the `vite` service so PHP grading never pays for a Node install; Node joins PHP
+# as a toolchain for it.
 version: 1
 runtime:
   type: php
   version: "8.3"
+toolchains:
+  - type: node
+    version: "22"
 install:
   commands:
     - composer install --no-interaction --prefer-dist --no-progress

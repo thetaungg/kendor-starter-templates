@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Rust axum web starter. The candidate builds handlers in src/main.rs; the server listens on the
+# sandbox port behind the Kendor preview proxy. Grading runs the suite harness (cargo test → TAP).
+# The install compiles the dependencies once, while the grade still has network.
+version: 1
+runtime:
+  type: rust
+  version: "1.98"
+services:
+  app:
+    install:
+      commands:
+        - cargo build --tests --color never
+    dev:
+      # No file watcher: restart the app from the terminal panel after an edit.
+      command: cargo run --color never
+      port: 8080
+    test:
+      command: cargo test --color never 2>&1 | kendor-cargo-tap
+preview:
+  service: app
+kendor:
+  title: axum
+  entryFile: src/main.rs
+  order: 0
+  gradeService: app

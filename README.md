@@ -14,7 +14,11 @@ them to S3 (it never serves them from GitHub directly).
 | `python-fastapi` | Python (FastAPI) | `main.py` |
 | `go-http` | Go (`net/http`) | `main.go` |
 | `go-cli` | Go (command line) | `main.go` |
-| `single-file-node` · `-php` · `-python` · `-go` | one per runtime | the one editable solution file |
+| `java-spring` | Java (Spring Boot, Maven) | `src/main/java/com/example/demo/GreetingController.java` |
+| `rust-axum` | Rust (axum) | `src/main.rs` |
+| `cpp-cmake` | C++ (CMake, command line) | `src/wordcount.cpp` |
+| `java-go-cpp` | Java + Go + C++ (three services, one sandbox) | `api/src/main/java/com/example/demo/GreetingController.java` |
+| `single-file-node` · `-php` · `-python` · `-go` · `-java` · `-rust` · `-cpp` | one per runtime | the one editable solution file |
 
 Challenge templates live under `templates/<language>/<slug>/` and are seeded the same way.
 
