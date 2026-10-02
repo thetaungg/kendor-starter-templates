@@ -1,30 +1,18 @@
-# Simple PHP Template
+# Simple PHP
 
-This is a basic PHP template that works without any dependencies.
+Plain PHP with no framework, served by PHP's built-in server. It starts by itself and shows in the
+preview. Changes appear when you refresh the preview.
 
-## Features
+## Run it
 
-- Pure PHP - no framework required
-- Works immediately in php-wasm
-- No composer or vendor directory needed
-- Full PHP 8.3 functionality
+The server is already running in the `app` terminal tab. Each `.php` file is its own page:
 
-## Usage
+- `/` runs `index.php`.
+- `/example.php` runs `example.php`, a few basic PHP examples.
 
-1. Edit `index.php` to create your PHP application
-2. Add more PHP files as needed
-3. Access them via the preview
+Add a file such as `about.php` and open `/about.php` in the preview.
 
-## Example
+## Files
 
-See `example.php` for basic PHP examples.
-
-## PHP Features Available
-
-- All PHP 8.3 functions
-- File system operations
-- HTTP request handling
-- Session management
-- And more!
-
-Enjoy coding with PHP in the browser! 🚀
+- `index.php` is the home page, the place to start.
+- `example.php` shows basic PHP syntax.
