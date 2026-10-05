@@ -22,3 +22,10 @@ docker compose kill worker           # what happens to the jobs in flight?
 4. Be ready to explain how you'd watch this queue in production and what you'd change at 100× the load.
 
 You can change anything in `app/` and `compose.yaml`.
+
+## Seeing it in the preview
+
+The preview reaches a container only through a published port: keep `ports: ["3000:3000"]` (or
+`docker run -p 3000:3000`) for anything you want to open from the preview's port list. A container
+without published ports is still reachable from the terminal on Compose's network, but not from the
+preview.

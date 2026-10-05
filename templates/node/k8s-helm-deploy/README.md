@@ -13,6 +13,10 @@ kubectl get pods -w
 The `cluster` service keeps a port-forward to `svc/orders-api` running, so the preview shows the app as
 soon as your Service exists.
 
+To open anything else in the preview, forward it with `--address 0.0.0.0`:
+`kubectl port-forward svc/<name> 8080:80 --address 0.0.0.0`. Without it, kubectl listens on localhost only
+and the port never shows up in the preview.
+
 ## Your task
 
 1. **Finish the chart.** The Deployment takes its replica count, image and resources from `values.yaml`,
