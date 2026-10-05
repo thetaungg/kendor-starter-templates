@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Distributed worker queue on Docker Compose: Valkey, an API that enqueues jobs, and workers. The sandbox
+# runs its own Docker daemon (sandbox.containers), so the candidate scales and restarts services
+# themselves. Reviewed, not graded: grades run without the sandbox's Docker.
+version: 1
+runtime:
+  type: node
+  version: "22"
+sandbox:
+  containers: true
+services:
+  app:
+    dev:
+      command: docker compose up --build
+      port: 3000
+preview:
+  service: app
+kendor:
+  type: CODING
+  title: "Distributed worker queue (Docker Compose)"
+  difficulty: hard
+  category: Backend
+  tags: [docker, compose, queues, distributed-systems, valkey]
+  entryFile: app/worker.js
+  estimatedMinutes: 60

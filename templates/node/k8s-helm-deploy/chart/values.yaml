@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: orders-api
+  tag: dev
+  pullPolicy: Never
+
+greeting: hello
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 128Mi

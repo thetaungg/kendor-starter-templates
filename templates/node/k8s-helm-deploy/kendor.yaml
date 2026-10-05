@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Ship a small service to Kubernetes with Helm. The sandbox runs a single-node k3s cluster on its own
+# Docker daemon (sandbox.kubernetes), so images built with `docker build` run in the cluster as they are.
+# Reviewed, not graded.
+version: 1
+runtime:
+  type: node
+  version: "22"
+sandbox:
+  kubernetes: true
+services:
+  # The preview follows the candidate's Service once it exists.
+  cluster:
+    dev:
+      command: until kubectl port-forward svc/orders-api 3000:80 --address 0.0.0.0; do sleep 3; done
+      port: 3000
+preview:
+  service: cluster
+kendor:
+  type: CODING
+  title: "Deploy with Kubernetes and Helm (k3s)"
+  difficulty: medium
+  category: DevOps
+  tags: [kubernetes, helm, docker, k3s, devops]
+  entryFile: chart/templates/deployment.yaml
+  estimatedMinutes: 45

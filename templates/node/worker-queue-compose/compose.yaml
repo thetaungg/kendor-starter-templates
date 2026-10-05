@@ -1,0 +1,21 @@
+services:
+  valkey:
+    image: valkey/valkey:9-alpine
+
+  api:
+    build: ./app
+    command: node api.js
+    environment:
+      REDIS_URL: redis://valkey:6379
+    ports:
+      - "3000:3000"
+    depends_on:
+      - valkey
+
+  worker:
+    build: ./app
+    command: node worker.js
+    environment:
+      REDIS_URL: redis://valkey:6379
+    depends_on:
+      - valkey
