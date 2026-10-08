@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Go command-line starter. A multi-file workspace (main.go + a package) with no preview: the candidate
+# runs it from the terminal with `go run . <args>`. Grading runs the suite harness (go test -json → TAP).
+version: 1
+runtime:
+  type: go
+  version: "1.27"
+services:
+  app:
+    test:
+      command: go test -json ./... | node /opt/kendor/gotest-tap.mjs
+# Starter-catalog metadata — read by the registry seed (title/order drive the builder dropdown).
+kendor:
+  category: Project
+  title: Command-line app
+  entryFile: main.go
+  order: 1
+  gradeService: app
+  readonlyPaths:
+    - wordcount/wordcount_test.go

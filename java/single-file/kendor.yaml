@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Single-file Java challenge starter. The candidate edits Solution.java; the hidden test
+# (SolutionTest.java) grades it via the suite harness: javac + the JUnit console launcher from the
+# Java toolchain folder (no Maven, no network), its XML reports converted to TAP. Builds land in the
+# scratch tmpfs, never in the workspace. Program output goes to stderr: only the converter's TAP is
+# on stdout, which is all the grader scores. No preview.
+version: 1
+runtime:
+  type: java
+  version: "21"
+services:
+  app:
+    test:
+      command: >-
+        rm -rf /opt/kendor/scratch/junit &&
+        javac -d /opt/kendor/scratch/junit/classes -cp "$JUNIT_CONSOLE" *.java &&
+        java -jar "$JUNIT_CONSOLE" execute --disable-banner --details=none
+        -cp /opt/kendor/scratch/junit/classes --scan-classpath
+        --reports-dir=/opt/kendor/scratch/junit/reports 1>&2;
+        kendor-junit-tap /opt/kendor/scratch/junit/reports
+kendor:
+  category: Project
+  type: SINGLE_FILE
+  title: Single file
+  entryFile: Solution.java
+  order: 10
+  gradeService: app
+  editablePaths:
+    - Solution.java
+  readonlyPaths:
+    - SolutionTest.java

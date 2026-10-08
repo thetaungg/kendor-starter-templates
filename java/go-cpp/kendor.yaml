@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# A three-language project in one sandbox: a Spring Boot API (api/), a Go indexer (indexer/) and a C++
+# ranking engine (engine/). Java is the runtime; Go and C++ join it as toolchains, so all three are on
+# PATH with their language servers. Each service builds and tests in its own folder, and the grade
+# runs all three suites and merges the results as `service › test`.
+version: 1
+runtime:
+  type: java
+  version: "21"
+toolchains:
+  - type: go
+    version: "1.27"
+  - type: cpp
+    version: "23"
+services:
+  api:
+    workDir: api
+    install:
+      commands:
+        - mvn -B -q -Dmaven.test.failure.ignore=true test 1>&2 || true
+    dev:
+      command: SERVER_PORT=$PORT mvn -B -q spring-boot:run
+      port: 8080
+    test:
+      command: rm -rf target/surefire-reports; mvn -B -q test 1>&2; kendor-junit-tap 'target/surefire-reports/*.xml'
+  indexer:
+    workDir: indexer
+    test:
+      command: go test -json ./... | kendor-gotest-tap
+  engine:
+    workDir: engine
+    install:
+      commands:
+        - cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+        - cmake --build build
+    test:
+      command: >-
+        rm -f /opt/kendor/scratch/engine-report.xml;
+        cmake --build build 1>&2 &&
+        ./build/tests --reporter junit::out=/opt/kendor/scratch/engine-report.xml 1>&2;
+        kendor-junit-tap /opt/kendor/scratch/engine-report.xml
+preview:
+  service: api
+kendor:
+  category: Project
+  title: Java + Go + C++ services
+  entryFile: api/src/main/java/com/example/demo/GreetingController.java
+  order: 1
+  gradeServices: [api, indexer, engine]
+  readonlyPaths:
+    - api/src/test/
+    - indexer/indexer_test.go
+    - engine/tests/

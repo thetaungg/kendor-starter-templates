@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# C++ command-line starter (CMake + Ninja). A small library in src/ with a main, tested with Catch2 from
+# the C++ toolchain folder. No preview: the candidate runs ./build/app from the terminal. The install
+# configures and builds once (and writes build/compile_commands.json for clangd); the test rebuilds
+# what changed, then Catch2's JUnit report is converted to TAP.
+version: 1
+runtime:
+  type: cpp
+  version: "23"
+services:
+  app:
+    install:
+      commands:
+        - cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+        - cmake --build build
+    test:
+      command: >-
+        rm -f /opt/kendor/scratch/report.xml;
+        cmake --build build 1>&2 &&
+        ./build/tests --reporter junit::out=/opt/kendor/scratch/report.xml 1>&2;
+        kendor-junit-tap /opt/kendor/scratch/report.xml
+kendor:
+  category: Project
+  title: Command-line app (CMake)
+  entryFile: src/wordcount.cpp
+  order: 0
+  gradeService: app
+  readonlyPaths:
+    - tests/

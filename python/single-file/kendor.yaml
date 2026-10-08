@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Single-file Python challenge starter. The candidate edits solution.py; the hidden test
+# (test_solution.py) grades it via the suite harness. No dev service ⇒ no preview.
+version: 1
+runtime:
+  type: python
+  version: "3.12"
+services:
+  app:
+    test:
+      command: pytest --tap-stream
+kendor:
+  category: Project
+  type: SINGLE_FILE
+  title: Single file
+  entryFile: solution.py
+  order: 10
+  gradeService: app
+  editablePaths:
+    - solution.py
+  readonlyPaths:
+    - test_solution.py

@@ -1,42 +1,28 @@
-# Kendor starter templates
+# Kendor templates
 
-Starter scaffolds for Kendor coding challenges — **one folder per starter**, files at each
-folder's root. These are the source of truth for the built-in starters; the Kendor backend syncs
-them to S3 (it never serves them from GitHub directly).
+Every project a Kendor challenge can start from, **one folder per template** at
+`<language>/<slug>/`, files at the folder's root. The Kendor backend syncs them to S3; it
+never serves them from GitHub directly.
 
-| Folder | Runtime | Entry |
-|---|---|---|
-| `vite-tsx` | Node.js | `src/App.tsx` |
-| `node-postgres` | Node.js (Express + PostgreSQL + Valkey) | `src/app.js` |
-| `vite-jsx` | Node.js | `src/App.jsx` |
-| `laravel` | PHP (Laravel) | `routes/web.php` |
-| `simple-php` | PHP | `index.php` |
-| `python-flask` | Python (Flask) | `app.py` |
-| `python-fastapi` | Python (FastAPI) | `main.py` |
-| `go-http` | Go (`net/http`) | `main.go` |
-| `go-cli` | Go (command line) | `main.go` |
-| `java-spring` | Java (Spring Boot, Maven) | `src/main/java/com/example/demo/GreetingController.java` |
-| `rust-axum` | Rust (axum) | `src/main.rs` |
-| `cpp-cmake` | C++ (CMake, command line) | `src/wordcount.cpp` |
-| `java-go-cpp` | Java + Go + C++ (three services, one sandbox) | `api/src/main/java/com/example/demo/GreetingController.java` |
-| `single-file-node` · `-php` · `-python` · `-go` · `-java` · `-rust` · `-cpp` | one per runtime | the one editable solution file |
+A template is self-defining: its `kendor.yaml` runs it, and the `kendor:` block describes it in the
+builder (`title`, `type`, `category`, `order`, `entryFile`, `readonlyPaths`, `solutionDir`).
 
-Challenge templates live under `templates/<language>/<slug>/` and are seeded the same way.
+- **Projects** (`category: Project`) are runnable apps with no brief, such as `node/vite-tsx`,
+  `php/laravel` or `python/fastapi`. Each language's `single-file` project is the default for
+  single-file challenges.
+- **Challenges** (any other category) add a brief in `README.md` and tests, such as
+  `python/sliding-window` or `node/worker-queue-compose`. A `solutionDir` (e.g. `.solution`) holds the
+  reference solution and is left out of the candidate's files.
 
-Starters are **source-only** — no `node_modules/` or `vendor/`. Dependencies are installed by the
-sandbox executor's build phase (or baked into its image), so don't commit installed deps.
+Templates are **source-only**: no `node_modules/` or `vendor/`. The sandbox installs dependencies.
 
 ## Publishing changes
 
-Edit a folder and push to `main`. Then, from the Kendor backend (`apps/backend`), re-run the seed
-to sync GitHub → S3:
+Edit a folder and push to `main`, then re-run the seed from the Kendor backend (`apps/backend`):
 
 ```bash
-STARTERS_REPO=thetaungg/kendor-starter-templates \
-  npx ts-node -r tsconfig-paths/register prisma/seed-runtimes.ts
+pnpm seed:runtimes
 ```
 
-The seed fetches this repo once, extracts each folder, re-roots and re-zips it, and uploads to
-`templates/starters/<slug>.zip` in S3. Starters are self-defining: any top-level folder with a
-`kendor.yaml` is one, and its `kendor:` block (`title`, `entryFile`, `order`) drives the builder
-dropdown. To add a starter, add a folder here and re-run the seed.
+It fetches this repo once, zips each folder and upserts it as a template, keyed by
+`<language>-<slug>`. To add a template, add a folder and re-run the seed.

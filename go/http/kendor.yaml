@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+# Go net/http web starter. The candidate builds handlers in main.go; the stdlib server runs behind the
+# Kendor preview proxy (net/http does not restrict Host headers, so no proxy plugin is needed). Grading
+# runs the suite harness (go test -json → TAP). Stdlib only, so there is nothing to install.
+version: 1
+runtime:
+  type: go
+  version: "1.27"
+services:
+  app:
+    dev:
+      # No file watcher in the stdlib: restart the process from the terminal panel after an edit.
+      command: go run .
+      port: 8080
+    test:
+      command: go test -json ./... | node /opt/kendor/gotest-tap.mjs
+preview:
+  service: app
+# Starter-catalog metadata — read by the registry seed (title/order drive the builder dropdown).
+kendor:
+  category: Project
+  title: net/http
+  entryFile: main.go
+  order: 0
+  readonlyPaths:
+    - main_test.go
