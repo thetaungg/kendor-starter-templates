@@ -11,8 +11,9 @@ builder (`title`, `type`, `category`, `order`, `entryFile`, `readonlyPaths`, `so
   `php/laravel` or `python/fastapi`. Each language's `single-file` project is the default for
   single-file challenges.
 - **Challenges** (any other category) add a brief in `README.md` and tests, such as
-  `python/sliding-window` or `node/worker-queue-compose`. A `solutionDir` (e.g. `.solution`) holds the
-  reference solution and is left out of the candidate's files.
+  `node/worker-queue-compose` or `node/k8s-helm-deploy`. They are real work on a real project, never
+  puzzles. A `solutionDir` (e.g. `.solution`) holds the reference solution and is left out of the
+  candidate's files.
 
 Templates are **source-only**: no `node_modules/` or `vendor/`. The sandbox installs dependencies.
 
@@ -25,4 +26,5 @@ pnpm seed:runtimes
 ```
 
 It fetches this repo once, zips each folder and upserts it as a template, keyed by
-`<language>-<slug>`. To add a template, add a folder and re-run the seed.
+`<language>-<slug>`. To add a template, add a folder and re-run the seed. To retire one, delete its
+folder: the seed unpublishes it, and challenges already made from it keep working.
