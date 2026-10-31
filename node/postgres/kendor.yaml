@@ -19,7 +19,8 @@ services:
       commands:
         - npm ci
     dev:
-      command: node --watch src/server.js
+      # The folder, not the file: editors like Claude Code save by swapping the file, which a file watch loses.
+      command: node --watch-path=src src/server.js
       port: 3000
     test:
       command: node --test
