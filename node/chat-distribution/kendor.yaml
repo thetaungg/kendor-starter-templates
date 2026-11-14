@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+version: 1
+runtime:
+  type: node
+  version: "22"
+toolchains:
+  - type: python
+    version: "3.12"
+  - type: go
+    version: "1.27"
+  - type: java
+    version: "21"
+  - type: rust
+    version: "1.98"
+  - type: cpp
+    version: "23"
+  - type: php
+    version: "8.4"
+databases:
+  - type: postgres
+    version: "18"
+  - type: valkey
+    version: "9"
+  - type: mongodb
+    version: "8.0"
+install:
+  commands:
+    - npm ci
+services:
+  app:
+    dev:
+      command: npm run dev
+      port: 3000
+    test:
+      command: node sim/check.mjs
+preview:
+  service: app
+requests:
+  - name: Mira's inbox
+    url: /agents/mira/inbox
+  - name: A client writes
+    method: POST
+    url: /chats/incoming
+    headers:
+      content-type: application/json
+    body: '{"clientId": "client-demo", "clientName": "Demo Client", "text": "Is the Crete week in May still available?"}'
+  - name: Overview (manager page data)
+    url: /api/overview
+kendor:
+  type: CODING
+  title: "Every chat answered: fair chat routing"
+  difficulty: hard
+  category: Backend
+  tags: [typescript, system-design, real-time, product-judgement, ai-agents]
+  order: 20
+  estimatedMinutes: 480
+  entryFile: README.md
+  gradeService: app
+  readonlyPaths:
+    - sim/
+    - CONTRACT.md

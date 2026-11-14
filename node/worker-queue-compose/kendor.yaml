@@ -22,4 +22,5 @@ kendor:
   category: Backend
   tags: [docker, compose, queues, distributed-systems, valkey]
   entryFile: app/worker.js
+  order: 30
   estimatedMinutes: 60

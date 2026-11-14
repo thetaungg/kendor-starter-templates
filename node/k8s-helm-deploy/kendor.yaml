@@ -23,4 +23,5 @@ kendor:
   category: DevOps
   tags: [kubernetes, helm, docker, k3s, devops]
   entryFile: chart/templates/deployment.yaml
+  order: 40
   estimatedMinutes: 45

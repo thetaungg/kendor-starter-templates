@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://kendor.dev/config-schema/v1
+version: 1
+runtime:
+  type: node
+  version: "22"
+databases:
+  - type: postgres
+    version: "18"
+    init: db
+install:
+  commands:
+    - npm ci
+services:
+  api:
+    dev:
+      command: npm run dev:api
+      port: 3000
+    test:
+      command: npm test
+  web:
+    dev:
+      command: npm run dev:web -- --port $PORT --strictPort
+      port: 5173
+preview:
+  service: web
+requests:
+  - name: A customer writes
+    method: POST
+    url: /api/provider/webhook
+    headers:
+      content-type: application/json
+    body: '{"messageId": "demo-1", "channel": "customers", "from": {"phone": "+351 910 000 777", "name": "Rita Lopes"}, "text": "Hi, my order says delivered but nothing arrived.", "sentAt": "2026-11-07T12:00:00Z"}'
+  - name: Sign in as Kofi
+    method: POST
+    url: /api/login
+    headers:
+      content-type: application/json
+    body: '{"email": "kofi@spoonrun.test", "password": "spoon"}'
+kendor:
+  type: CODING
+  title: "Rescue and ship: a broken help desk"
+  difficulty: medium
+  category: Full-stack
+  tags: [typescript, react, express, postgres, debugging, ai-agents]
+  order: 10
+  estimatedMinutes: 120
+  entryFile: README.md
+  gradeService: api
+  readonlyPaths:
+    - test/
+    - scripts/shift.ts
+    - api/src/orders.ts

@@ -1,0 +1,31 @@
+{
+    "name": "spoonrun-desk",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev:api": "node --watch-path=api/src --import tsx api/src/server.ts",
+        "dev:web": "vite --config web/vite.config.ts",
+        "build": "vite build --config web/vite.config.ts",
+        "test": "node --import tsx --test --test-concurrency=1 test/*.test.ts",
+        "shift": "node --import tsx scripts/shift.ts",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "express": "^5.1.0",
+        "pg": "^8.16.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
+    },
+    "devDependencies": {
+        "@kendordev/vite": "^0.1.0",
+        "@types/express": "^5.0.3",
+        "@types/node": "^22.15.0",
+        "@types/pg": "^8.15.4",
+        "@types/react": "^18.3.23",
+        "@types/react-dom": "^18.3.7",
+        "@vitejs/plugin-react": "^4.6.0",
+        "tsx": "^4.20.3",
+        "typescript": "^5.8.3",
+        "vite": "^6.3.5"
+    }
+}
